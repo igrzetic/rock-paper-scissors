@@ -20,6 +20,7 @@ function getComputerChoice() {
     return computerSelection;
 }
 
+/*
 function playRound() {
     let round = 1;
     let Pscore = 0;
@@ -50,5 +51,5 @@ function playRound() {
     
     console.log("Final score: Player: " + Pscore + " Computer: " + Cscore);
 }
-
 playRound();
+*/

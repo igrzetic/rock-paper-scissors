@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+}
+
+#player-choice,
+#computer-choice {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#winner {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+#score {
+    margin-top: 20px;
+    font-size: 18px;
+}
