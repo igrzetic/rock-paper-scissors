@@ -1,55 +1,60 @@
-function getPlayerChoice() {
-    let playerSelection = prompt("Choose rock, paper, scissors:").toLowerCase();
-    const validPick = ['rock', 'paper', 'scissors'];
+let playerScore = 0;
+let computerScore = 0;
+let round = 0;
 
-    while (!validPick.includes(playerSelection)) {
-        alert("Invalid choice. Pick between rock, paper, scissors.");
-        playerSelection = prompt("Choose rock, paper, scissors:").toLowerCase();
+function computerPlay () {
+    const choices = ['rock', 'paper', 'scissors'];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+}
+
+function playRound (playerSelection) {
+    const computerSelection = computerPlay();
+
+    round++;
+    document.getElementById('round').textContent = "Round: " + round;
+
+    let result;
+    if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+    ) {
+        result = 'You Win!';
+        playerScore++;
+    } else if (playerSelection === computerSelection) {
+        result = "It's a tie";
+    } else {
+        result = 'Computer Wins!';
+        computerScore++;
     }
+        
+    const computerChoiceTxt = `Computer chose: ${computerSelection}`;
+    document.getElementById('computer-choice').textContent = computerChoiceTxt;
 
-    console.log("Player: " + playerSelection);
-    return playerSelection;
-}
-
-function getComputerChoice() {
-    const validPick = ['rock', 'paper', 'scissors'];
-    const randomPick = Math.floor(Math.random() * 3);
-    const computerSelection = validPick[randomPick];
+    document.getElementById('result').textContent = result;
+    document.getElementById('scores').textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
     
-    console.log("Computer: " + computerSelection);
-    return computerSelection;
-}
-
-/*
-function playRound() {
-    let round = 1;
-    let Pscore = 0;
-    let Cscore = 0;
-    const validPick = ['rock', 'paper', 'scissors'];
-
-    for (let i = 0; i < 5; i++) {
-        console.log("Round: " + round);
-        const playerSelection = getPlayerChoice();
-        const computerSelection = getComputerChoice();
-
-        const playerIndex = validPick.indexOf(playerSelection);
-        const computerIndex = validPick.indexOf(computerSelection);
-
-        if (playerIndex === computerIndex) {
-            console.log("It's a tie!");
-        }
-        else if ((playerIndex + 1) %3 === computerIndex) {
-            Cscore ++
-            console.log("Computer wins this round!")
-        }
-        else {
-            Pscore ++
-            console.log("Player wins this round!")
-        }
-        round ++;
+    if(playerScore === 5) {
+        document.getElementById('result').textContent = "You win the game!";
+        endGame();
+    } else if (computerScore === 5) {
+        document.getElementById('result').textContent = "Game Over! Computer wins!";
+        endGame();
     }
-    
-    console.log("Final score: Player: " + Pscore + " Computer: " + Cscore);
 }
-playRound();
-*/
+
+function restartGame () {
+    playerScore = 0;
+    computerScore = 0;
+    round = 0;
+
+    document.getElementById('round').textContent = 'Round: 0';
+    document.getElementById('result').textContent = '';
+    document.getElementById('scores').textContent = 'Player: 0 - Computer: 0';
+    document.getElementById('restartBtn').style.display = 'none';
+}
+
+function endGame () {
+    document.getElementById('restartBtn').style.display = 'inline-block';
+}
